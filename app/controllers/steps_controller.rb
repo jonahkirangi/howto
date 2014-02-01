@@ -1,5 +1,7 @@
 class StepsController < ApplicationController
   before_action :set_step, only: [:show, :edit, :update, :destroy]
+  before_action :set_list #only: [:show, :edit, :update, :destroy]
+
 
   # GET /steps
   # GET /steps.json
@@ -12,9 +14,9 @@ class StepsController < ApplicationController
   def show
   end
 
-  # GET /steps/new
+  # GET lists/3/steps/new
   def new
-    @step = Step.new
+    @step = @list.steps.build
   end
 
   # GET /steps/1/edit
@@ -65,6 +67,10 @@ class StepsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_step
       @step = Step.find(params[:id])
+    end
+
+    def set_list
+      @list = List.find(params[:list_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
